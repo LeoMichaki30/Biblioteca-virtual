@@ -33,7 +33,7 @@ O teste `BibliotecaApplicationTests.contextLoads()` verifica se o contexto do Sp
 
 Na validação inicial, a aplicação e o teste compilaram com Java 21, mas o teste apresentou erro na inicialização: `Failed to determine a suitable driver class`.
 
-A dependência do driver PostgreSQL já está declarada. A conexão é configurada pelo perfil `local`, conforme as instruções abaixo. Em 29/10/2026, após preencher e salvar o arquivo local, a conexão com o Supabase e a inicialização do JPA foram validadas: `./mvnw test -Dspring.profiles.active=local` terminou com `BUILD SUCCESS` (1 teste, nenhuma falha ou erro). Esse teste verifica a inicialização; ainda não há entidades nem operações de cadastro e consulta implementadas.
+A dependência do driver PostgreSQL já está declarada. A conexão é configurada pelo perfil `local`, conforme as instruções abaixo. Em 29/10/2026, após preencher e salvar o arquivo local, a conexão com o Supabase e a inicialização do JPA foram validadas: `./mvnw test -Dspring.profiles.active=local` terminou com `BUILD SUCCESS` (1 teste, nenhuma falha ou erro). Esse teste verifica a inicialização; ele não comprova operações de cadastro e consulta no banco.
 
 Os arquivos gerados pela compilação e os relatórios dos testes ficam em `target/`, ignorado pelo Git.
 
@@ -101,3 +101,13 @@ O `.gitignore` já exclui `.env`, `.env.*` (exceto `.env.example`) e `applicatio
 5. Criar o commit e fazer push somente após autorização do responsável pelo projeto.
 
 O commit registra uma versão no repositório local. O push envia os commits locais ao GitHub.
+
+## Modelo de usuários
+
+A classe `usuario.Usuario` representa os dados de uma conta: `id` (UUID gerado pelo JPA), `nome`, `email` e `senhaHash`. O construtor público recebe um hash já calculado; ele não transforma nem valida uma senha original. Essa responsabilidade será implementada no serviço de cadastro com um `PasswordEncoder`.
+
+`@Entity` identifica a classe como entidade JPA. `@Table` define o mapeamento para `app.usuarios`, separado do schema público do Supabase. As anotações `@Column` descrevem as restrições esperadas para as colunas, incluindo e-mail único; elas não substituem a validação dos dados recebidos pela API. `@JsonIgnore` impede que o hash seja incluído na serialização JSON padrão.
+
+O construtor protegido sem argumentos é usado pelo JPA ao carregar registros. Os métodos `get...` permitem consultar os campos sem oferecer alterações diretas por setters.
+
+Esta etapa define apenas o modelo Java. O schema `app` e a tabela `usuarios` ainda precisam ser criados por uma migração; a configuração local mantém `ddl-auto=none`. Ainda não há repositório, serviço, rota de cadastro ou login. O teste de contexto verifica se o Spring aceita o mapeamento, sem testar a persistência da entidade.
