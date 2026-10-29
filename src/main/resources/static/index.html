@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Um espaço para organizar seus livros e suas próximas leituras. Conheça a Biblioteca Virtual.">
+  <title>Seu espaço de leitura | Biblioteca Virtual</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/biblioteca.css">
+  <script src="/js/biblioteca.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conta">Ir para o formulário</a>
+  <div class="page">
+    <header class="header">
+      <a class="brand" href="/" aria-label="Biblioteca Virtual, início">
+        <svg class="brand-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M18 29V9M18 11C14 7 8 7 3 9v19c5-2 11-2 15 1 4-3 10-3 15-1V9c-5-2-11-2-15 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 13c2-.3 4 0 6 1M8 18c2-.3 4 0 6 1M22 14c2-1 4-1.3 6-1M22 19c2-1 4-1.3 6-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Biblioteca<span class="brand-light">Virtual</span></span>
+      </a>
+      <span class="header-note"><span class="small-star" aria-hidden="true">✳</span> Uma história de cada vez</span>
+    </header>
+
+    <main class="layout">
+      <section class="welcome" aria-labelledby="welcome-title">
+        <p class="eyebrow"><span></span> SEU PRÓXIMO CAPÍTULO</p>
+        <h1 id="welcome-title">Todo livro merece<br>um lugar.<br><em>O seu também.</em></h1>
+        <p class="intro">Entre páginas lidas e histórias por descobrir,<br class="desktop-break"> uma biblioteca com a sua cara.</p>
+
+        <div class="book-scene" aria-hidden="true">
+          <span class="scene-circle"></span>
+          <span class="scene-star star-one">✳</span>
+          <span class="scene-star star-two">✧</span>
+          <div class="book book-green"><span class="book-author">MACHADO DE ASSIS</span><span class="book-title">Dom<br>Casmurro</span><span class="book-ornament">❋</span><span class="book-edition">ENTRE CLÁSSICOS</span></div>
+          <div class="book book-red"><span class="book-author">JANE AUSTEN</span><span class="book-title">Orgulho<br><i>&amp;</i><br>Preconceito</span><span class="book-flower">✳</span><span class="book-edition">HISTÓRIAS QUE FICAM</span></div>
+          <div class="book book-cream"><span class="book-author">ALUÍSIO AZEVEDO</span><span class="book-title">O Cortiço</span><span class="book-window"></span><span class="book-edition">UM NOVO OLHAR</span></div>
+          <span class="shelf"></span>
+          <span class="scene-caption">Uma estante. Infinitas possibilidades.</span>
+        </div>
+
+        <div class="reading-path" aria-label="Organize suas leituras: Quero ler, Lendo, Já li e Abandonado">
+          <span><i class="dot dot-gold"></i>Quero ler</span><span><i class="dot dot-green"></i>Lendo</span><span><i class="dot dot-red"></i>Já li</span><span><i class="dot dot-gray"></i>Abandonado</span>
+        </div>
+      </section>
+
+      <section class="account" id="conta" aria-labelledby="account-title">
+        <div class="account-heading"><span class="section-number">01 / BEM-VINDO</span><span class="preview-badge">PRÉVIA</span></div>
+        <h2 id="account-title">Seu espaço de leitura.</h2>
+        <p class="account-subtitle">Guarde histórias. Descubra novos capítulos.</p>
+
+        <div class="tabs" role="tablist" aria-label="Acesso à biblioteca">
+          <button id="tab-cadastro" class="tab active" type="button" role="tab" aria-selected="true" aria-controls="panel-cadastro" tabindex="0">Criar conta</button>
+          <button id="tab-login" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-login" tabindex="-1">Entrar</button>
+        </div>
+
+        <p class="preview-note"><span aria-hidden="true">ⓘ</span> Prévia interativa. Nenhum dado será enviado ou salvo.</p>
+        <noscript><p class="feedback">Ative o JavaScript para alternar os formulários e testar esta prévia. Não há cadastro disponível ainda.</p></noscript>
+
+        <div id="panel-cadastro" role="tabpanel" aria-labelledby="tab-cadastro">
+          <form id="form-cadastro" autocomplete="off">
+            <div class="field"><label for="cadastro-nome">Como podemos te chamar?</label><input id="cadastro-nome" type="text" placeholder="Seu nome" required maxlength="100" autocomplete="off"></div>
+            <div class="field"><label for="cadastro-email">E-mail</label><input id="cadastro-email" type="email" placeholder="voce@exemplo.com" required maxlength="254" autocomplete="off" spellcheck="false" autocapitalize="none"></div>
+            <div class="field"><label for="cadastro-senha">Senha</label><div class="password-field"><input id="cadastro-senha" type="password" placeholder="Crie uma senha de teste" minlength="8" maxlength="128" required autocomplete="new-password" aria-describedby="senha-hint"><button class="password-toggle" type="button" data-password="cadastro-senha" aria-label="Mostrar senha" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg></button></div><span class="hint" id="senha-hint">Use pelo menos 8 caracteres e uma senha fictícia nesta prévia.</span></div>
+            <div class="field"><label for="cadastro-confirmacao">Confirme a senha</label><input id="cadastro-confirmacao" type="password" placeholder="Repita a senha de teste" required minlength="8" maxlength="128" autocomplete="new-password"></div>
+            <button class="submit-button" type="submit" disabled>Testar cadastro <span aria-hidden="true">↗</span></button>
+          </form>
+        </div>
+
+        <div id="panel-login" role="tabpanel" aria-labelledby="tab-login" hidden>
+          <form id="form-login" autocomplete="off">
+            <div class="field"><label for="login-email">E-mail</label><input id="login-email" type="email" placeholder="voce@exemplo.com" required maxlength="254" autocomplete="off" spellcheck="false" autocapitalize="none"></div>
+            <div class="field"><label for="login-senha">Senha</label><div class="password-field"><input id="login-senha" type="password" placeholder="Digite uma senha de teste" required maxlength="128" autocomplete="off" aria-describedby="login-hint"><button class="password-toggle" type="button" data-password="login-senha" aria-label="Mostrar senha" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg></button></div><span class="hint" id="login-hint">A entrada real estará disponível em uma próxima etapa.</span></div>
+            <button class="submit-button" type="submit" disabled>Testar entrada <span aria-hidden="true">↗</span></button>
+          </form>
+        </div>
+        <p id="form-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p>
+        <div class="account-footer"><span aria-hidden="true">❦</span><p>Para quem acredita que a próxima página<br>sempre pode surpreender.</p></div>
+      </section>
+    </main>
+
+    <footer class="footer"><span>Biblioteca Virtual <span aria-hidden="true">·</span> Feita para suas histórias.</span><span>O início de uma boa leitura <span aria-hidden="true">↗</span></span></footer>
+  </div>
+</body>
+</html>

@@ -111,3 +111,29 @@ A classe `usuario.Usuario` representa os dados de uma conta: `id` (UUID gerado p
 O construtor protegido sem argumentos é usado pelo JPA ao carregar registros. Os métodos `get...` permitem consultar os campos sem oferecer alterações diretas por setters.
 
 Esta etapa define apenas o modelo Java. O schema `app` e a tabela `usuarios` ainda precisam ser criados por uma migração; a configuração local mantém `ddl-auto=none`. Ainda não há repositório, serviço, rota de cadastro ou login. O teste de contexto verifica se o Spring aceita o mapeamento, sem testar a persistência da entidade.
+
+## Primeira interface: cadastro e login
+
+Inicie pelo terminal na pasta do `pom.xml`:
+
+```sh
+./mvnw spring-boot:run -Dspring-boot.run.profiles=local
+```
+
+Abra [http://localhost:8080](http://localhost:8080). Para encerrar a aplicação, use `Ctrl+C` no terminal. Se você configurou outra porta localmente, use essa porta no endereço.
+
+Esta é uma prévia visual: os formulários validam campos no navegador, mas não criam contas, não autenticam e não enviam nem salvam os valores. Use dados fictícios para experimentar. Nenhuma nova tabela é criada nesta etapa.
+
+- `static/index.html`: estrutura, textos e formulários de cadastro e entrada.
+- `static/css/biblioteca.css`: cores, layout, ilustração dos livros e adaptação para celular.
+- `static/js/biblioteca.js`: alternância de formulários, confirmação de senha e botão de mostrar senha. O envio é interceptado e exibe uma mensagem de prévia; os campos são limpos após a validação.
+- `config.SecurityConfig`: permite acesso público por GET somente à página inicial e aos arquivos da interface. As outras rotas exigem autenticação e a proteção CSRF continua ativa. A autenticação real será implementada em outra etapa.
+- `PaginaInicialTests`: verifica acesso público à interface, acesso aos arquivos estáticos, proteção de outras rotas e bloqueio de POST sem token CSRF. Esses testes verificam as respostas do Spring, não executam o JavaScript em um navegador.
+
+HTML define o conteúdo; CSS define a apresentação; JavaScript cuida das interações. O Spring Boot entrega esses arquivos a partir de `src/main/resources/static`, sem adicionar um framework de frontend ou outro processo de build.
+
+### Verificações desta interface
+
+A suíte Maven com o perfil `local` passou: 5 testes, nenhuma falha ou erro. O JavaScript passou pela verificação de sintaxe com `node --check`.
+
+Também foi feita uma verificação no Chrome, com dados fictícios, em larguras de 1440, 390 e 320 pixels: sem rolagem horizontal; alternância por teclado, confirmação de senha, validação de e-mail, mostrar/ocultar senha e limpeza dos campos funcionando. Os envios de prévia não geraram requisições de rede e uma rota privada retornou HTTP 401. Essa verificação de navegador foi executada separadamente e não faz parte da suíte Maven.
