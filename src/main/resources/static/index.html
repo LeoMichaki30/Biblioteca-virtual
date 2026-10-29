@@ -43,7 +43,7 @@
       </section>
 
       <section class="account" id="conta" aria-labelledby="account-title">
-        <div class="account-heading"><span class="section-number">01 / BEM-VINDO</span><span class="preview-badge">PRÉVIA</span></div>
+        <div class="account-heading"><span class="section-number">01 / BEM-VINDO</span><span class="preview-badge">CADASTRO ABERTO</span></div>
         <h2 id="account-title">Seu espaço de leitura.</h2>
         <p class="account-subtitle">Guarde histórias. Descubra novos capítulos.</p>
 
@@ -52,16 +52,16 @@
           <button id="tab-login" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-login" tabindex="-1">Entrar</button>
         </div>
 
-        <p class="preview-note"><span aria-hidden="true">ⓘ</span> Prévia interativa. Nenhum dado será enviado ou salvo.</p>
-        <noscript><p class="feedback">Ative o JavaScript para alternar os formulários e testar esta prévia. Não há cadastro disponível ainda.</p></noscript>
+        <p class="preview-note" id="form-note">Crie sua conta para começar. A entrada na biblioteca estará disponível em breve.</p>
+        <noscript><p class="feedback">Ative o JavaScript para criar sua conta e alternar os formulários.</p></noscript>
 
         <div id="panel-cadastro" role="tabpanel" aria-labelledby="tab-cadastro">
-          <form id="form-cadastro" autocomplete="off">
-            <div class="field"><label for="cadastro-nome">Como podemos te chamar?</label><input id="cadastro-nome" type="text" placeholder="Seu nome" required maxlength="100" autocomplete="off"></div>
-            <div class="field"><label for="cadastro-email">E-mail</label><input id="cadastro-email" type="email" placeholder="voce@exemplo.com" required maxlength="254" autocomplete="off" spellcheck="false" autocapitalize="none"></div>
-            <div class="field"><label for="cadastro-senha">Senha</label><div class="password-field"><input id="cadastro-senha" type="password" placeholder="Crie uma senha de teste" minlength="8" maxlength="128" required autocomplete="new-password" aria-describedby="senha-hint"><button class="password-toggle" type="button" data-password="cadastro-senha" aria-label="Mostrar senha" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg></button></div><span class="hint" id="senha-hint">Use pelo menos 8 caracteres e uma senha fictícia nesta prévia.</span></div>
-            <div class="field"><label for="cadastro-confirmacao">Confirme a senha</label><input id="cadastro-confirmacao" type="password" placeholder="Repita a senha de teste" required minlength="8" maxlength="128" autocomplete="new-password"></div>
-            <button class="submit-button" type="submit" disabled>Testar cadastro <span aria-hidden="true">↗</span></button>
+          <form id="form-cadastro" autocomplete="on">
+            <div class="field"><label for="cadastro-nome">Como podemos te chamar?</label><input id="cadastro-nome" type="text" placeholder="Seu nome" required maxlength="100" autocomplete="name"></div>
+            <div class="field"><label for="cadastro-email">E-mail</label><input id="cadastro-email" type="email" placeholder="voce@exemplo.com" required maxlength="254" autocomplete="email" spellcheck="false" autocapitalize="none"></div>
+            <div class="field"><label for="cadastro-senha">Senha</label><div class="password-field"><input id="cadastro-senha" type="password" placeholder="Crie sua senha" minlength="8" maxlength="128" required autocomplete="new-password" aria-describedby="senha-hint"><button class="password-toggle" type="button" data-password="cadastro-senha" aria-label="Mostrar senha" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg></button></div><span class="hint" id="senha-hint">Use entre 8 e 128 caracteres.</span></div>
+            <div class="field"><label for="cadastro-confirmacao">Confirme a senha</label><input id="cadastro-confirmacao" type="password" placeholder="Repita sua senha" required minlength="8" maxlength="128" autocomplete="new-password"></div>
+            <button class="submit-button" type="submit" disabled>Criar minha conta <span aria-hidden="true">↗</span></button>
           </form>
         </div>
 

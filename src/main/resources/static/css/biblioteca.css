@@ -93,3 +93,6 @@ input:focus { border-color: var(--wine); }
 @media (max-width: 800px) { .page { padding: 0 24px; max-width: 650px; }.header { min-height: 87px; }.header-note { display: none; }.layout { grid-template-columns: 1fr; gap: 32px; padding: 35px 0; }.welcome { text-align: center; }.eyebrow { justify-content: center; margin-top: 0; }h1 { font-size: clamp(40px, 8vw, 57px); letter-spacing: -1.8px; }.intro { margin: 17px 0 0; }.book-scene { display: none; }.reading-path { justify-content: center; gap: 17px; margin-top: 24px; padding-top: 20px; }.account { padding: 28px; }.footer { flex-direction: column; text-align: center; gap: 10px; }.brand { font-size: 23px; } }
 @media (max-width: 360px) { .page { padding: 0 16px; }.account { padding: 23px 19px; }.reading-path { gap: 10px; }.reading-path > span { font-size: 10px; }h2 { font-size: 26px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }
+
+.feedback-error { background: #fff0ee; border-color: #e7c5be; color: #782f3e; }
+.tab:disabled { cursor: wait; }

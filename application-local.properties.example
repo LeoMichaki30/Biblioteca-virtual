@@ -9,5 +9,5 @@ spring.datasource.password=[SENHA_DO_BANCO]
 spring.datasource.hikari.maximum-pool-size=2
 spring.datasource.hikari.minimum-idle=0
 
-# Nao cria nem altera tabelas nesta etapa.
+# O Hibernate nao altera tabelas. O Flyway executa as migracoes SQL.
 spring.jpa.hibernate.ddl-auto=none

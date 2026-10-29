@@ -3,6 +3,7 @@ package com.bibliotecavirtual.biblioteca;
 import java.nio.charset.StandardCharsets;
 
 import com.bibliotecavirtual.biblioteca.config.SecurityConfig;
+import com.bibliotecavirtual.biblioteca.config.CsrfController;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(controllers = CsrfController.class)
 @Import(SecurityConfig.class)
 class PaginaInicialTests {
 
@@ -34,7 +35,7 @@ class PaginaInicialTests {
                 .andExpect(status().isOk())
                 .andExpect(result -> assertThat(
                         result.getResponse().getContentAsString(StandardCharsets.UTF_8),
-                        containsString("Nenhum dado será enviado ou salvo.")));
+                        containsString("Crie sua conta para começar.")));
     }
 
     @Test
