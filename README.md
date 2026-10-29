@@ -8,7 +8,7 @@ Projeto de estudo em Java e Spring Boot para organizar uma biblioteca pessoal e 
 - Spring Boot 4.1.1
 - Maven pelo Maven Wrapper
 - Spring Web MVC, Spring Data JPA, Spring Security e Validation
-- Driver PostgreSQL; conexão com o banco ainda não configurada
+- PostgreSQL no Supabase; conexão local validada
 
 ## Preparar o ambiente
 
@@ -33,9 +33,48 @@ O teste `BibliotecaApplicationTests.contextLoads()` verifica se o contexto do Sp
 
 Na validação inicial, a aplicação e o teste compilaram com Java 21, mas o teste apresentou erro na inicialização: `Failed to determine a suitable driver class`.
 
-A dependência do driver PostgreSQL já está declarada. Falta configurar a conexão com o banco: atualmente, `application.properties` contém apenas o nome da aplicação e não há banco em memória configurado. O próximo passo é configurar PostgreSQL/Supabase e executar o teste novamente.
+A dependência do driver PostgreSQL já está declarada. A conexão é configurada pelo perfil `local`, conforme as instruções abaixo. Em 29/10/2026, após preencher e salvar o arquivo local, a conexão com o Supabase e a inicialização do JPA foram validadas: `./mvnw test -Dspring.profiles.active=local` terminou com `BUILD SUCCESS` (1 teste, nenhuma falha ou erro). Esse teste verifica a inicialização; ainda não há entidades nem operações de cadastro e consulta implementadas.
 
 Os arquivos gerados pela compilação e os relatórios dos testes ficam em `target/`, ignorado pelo Git.
+
+## Configurar PostgreSQL/Supabase no Mac
+
+Um perfil do Spring reúne configurações para um ambiente. O perfil `local` usa as configurações particulares deste computador.
+
+1. No projeto Supabase, abra **Connect** e escolha **Session pooler** (porta `5432`). Anote host, nome do banco e usuário exatamente como aparecem no painel. Use a senha do banco, não a senha da conta Supabase nem uma chave de API.
+2. Copie o modelo na pasta que contém o `pom.xml`:
+
+   ```sh
+   cp -n application-local.properties.example application-local.properties
+   ```
+
+3. Abra `application-local.properties` no VS Code e substitua os valores entre colchetes. A URL não deve conter usuário nem senha, pois eles têm propriedades próprias. Mantenha `sslmode=require` para exigir conexão criptografada. Em arquivos `.properties`, uma barra invertida literal na senha precisa ser escrita duas vezes.
+4. Confira que o Git ignora o arquivo privado:
+
+   ```sh
+   git check-ignore application-local.properties
+   ```
+
+   O comando deve imprimir `application-local.properties`. Não use `git add -f` nesse arquivo.
+5. Execute o teste com o perfil ativo:
+
+   ```sh
+   ./mvnw test -Dspring.profiles.active=local
+   ```
+
+6. Para iniciar a aplicação com a mesma configuração:
+
+   ```sh
+   ./mvnw spring-boot:run -Dspring-boot.run.profiles=local
+   ```
+
+O Spring Boot procura configurações externas na pasta de execução; por isso, execute os comandos na pasta do `pom.xml`. Sem ativar o perfil `local`, esse arquivo não é carregado.
+
+O modelo limita o pool a duas conexões e usa `ddl-auto=none`: esta etapa apenas configura o acesso, sem criar ou alterar tabelas automaticamente. A estrutura das tabelas será tratada quando implementarmos as entidades.
+
+O modelo `.example` contém apenas valores fictícios e pode ser versionado. O arquivo preenchido é privado e deverá ser configurado separadamente em cada Mac. Não envie sua senha pelo chat.
+
+Referência: [Supabase com Spring Boot](https://supabase.com/docs/guides/getting-started/quickstarts/spring-boot).
 
 ## Iniciar a aplicação
 

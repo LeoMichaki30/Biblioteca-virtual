@@ -1,0 +1,13 @@
+# Copie para application-local.properties na pasta do pom.xml.
+# Preencha somente a copia privada, ignorada pelo Git.
+# Obtenha os valores em Supabase > Connect > Session pooler.
+spring.datasource.url=jdbc:postgresql://[HOST_DO_SESSION_POOLER]:5432/[NOME_DO_BANCO]?sslmode=require
+spring.datasource.username=[USUARIO_DO_SESSION_POOLER]
+spring.datasource.password=[SENHA_DO_BANCO]
+
+# Limita o numero de conexoes usadas por este Mac.
+spring.datasource.hikari.maximum-pool-size=2
+spring.datasource.hikari.minimum-idle=0
+
+# Nao cria nem altera tabelas nesta etapa.
+spring.jpa.hibernate.ddl-auto=none
